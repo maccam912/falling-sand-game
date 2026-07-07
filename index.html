@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>Grainfall — falling sand puzzles</title>
+  <meta name="description" content="A falling-sand physics puzzle game. Pour sand, water, fire, oil and acid to solve levels.">
+  <meta name="theme-color" content="#0d1017">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/png" href="./icons/icon-192.png">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div id="app">
+    <header id="topbar">
+      <button id="menu-btn" class="icon-btn" aria-label="Levels">☰</button>
+      <div id="level-title">Grainfall</div>
+      <div class="topbar-actions">
+        <button id="brush-btn" class="icon-btn" aria-label="Brush size">●</button>
+        <button id="pause-btn" class="icon-btn" aria-label="Pause">⏸</button>
+        <button id="reset-btn" class="icon-btn" aria-label="Reset level">⟳</button>
+      </div>
+    </header>
+    <main id="stage">
+      <canvas id="game"></canvas>
+    </main>
+    <footer id="toolbar"></footer>
+    <div id="overlay" class="hidden"></div>
+  </div>
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
