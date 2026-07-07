@@ -1,5 +1,5 @@
 // Service worker: precache the whole game so it works offline.
-const CACHE = 'grainfall-v1';
+const CACHE = 'grainfall-v2';
 const ASSETS = [
   './',
   './index.html',

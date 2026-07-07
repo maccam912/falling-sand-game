@@ -1,7 +1,7 @@
 // Puzzle level definitions. Grid is 120 wide x 160 tall.
 import {
   WALL, SAND, WATER, OIL, FIRE, PLANT, SEED, WOOD, ACID, STONE, LAVA, TARGET,
-  ERASER,
+  ICE, SNOW, GUNPOWDER, GAS, HONEY, GLASS, ERASER,
 } from './elements.js';
 
 export const GRID_W = 120;
@@ -232,15 +232,52 @@ export const LEVELS = [
       return sim.counts[SEED] === 0 && sim.sprouted === 0 ? 'The seeds were destroyed!' : null;
     },
   },
+  {
+    name: 'Demolition',
+    desc: 'The crystals are buried under stone no acid or flame can shift. Gunpowder can. Pile it on, light the fuse — and stand back. Repeat charges dig deeper.',
+    budget: [[GUNPOWDER, 500], [FIRE, 30]],
+    build(p) {
+      p.floor();
+      // stone cave-in sealing a buried vault
+      p.rect(40, 123, 40, 5, STONE);
+      p.rect(36, 128, 4, 28, WALL);
+      p.rect(80, 128, 4, 28, WALL);
+      p.rect(52, 146, 16, 6, TARGET);
+    },
+    win(sim) { return sim.counts[TARGET] === 0; },
+    fail() { return null; },
+  },
+  {
+    name: 'Cold Snap',
+    desc: 'A frozen dam holds back a whole reservoir, and the seeds are parched. Fire melts ice — breach the dam low and let the flood do the rest.',
+    budget: [[FIRE, 120]],
+    build(p, sim) {
+      p.floor();
+      // reservoir on the left, sealed by an ice dam
+      p.rect(8, 126, 3, 30, WALL);
+      p.rect(11, 132, 29, 24, WATER);
+      p.rect(40, 126, 6, 30, ICE);
+      // seed pen downstream with a low retaining wall
+      p.rect(90, 148, 3, 8, WALL);
+      sim.set(70, 155, SEED);
+      sim.set(72, 155, SEED);
+    },
+    win(sim) { return sim.sprouted >= 1; },
+    fail(sim) {
+      return sim.counts[SEED] === 0 && sim.sprouted === 0 ? 'The seeds were destroyed!' : null;
+    },
+  },
 ];
 
 export const SANDBOX = {
   name: 'Sandbox',
   desc: 'No goals, no limits. Play with every element.',
   budget: [
-    [SAND, Infinity], [WATER, Infinity], [OIL, Infinity], [FIRE, Infinity],
-    [PLANT, Infinity], [SEED, Infinity], [WOOD, Infinity], [ACID, Infinity],
-    [STONE, Infinity], [LAVA, Infinity], [WALL, Infinity], [ERASER, Infinity],
+    [SAND, Infinity], [WATER, Infinity], [OIL, Infinity], [HONEY, Infinity],
+    [FIRE, Infinity], [LAVA, Infinity], [GAS, Infinity], [GUNPOWDER, Infinity],
+    [SNOW, Infinity], [ICE, Infinity], [PLANT, Infinity], [SEED, Infinity],
+    [WOOD, Infinity], [ACID, Infinity], [STONE, Infinity], [GLASS, Infinity],
+    [WALL, Infinity], [ERASER, Infinity],
   ],
   build(p) { p.floor(); },
   win() { return false; },
