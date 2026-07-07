@@ -1,6 +1,7 @@
 // Game shell: rendering, input, HUD, level flow.
 import {
-  EMPTY, WALL, FIRE, STEAM, SMOKE, WATER, OIL, ACID, LAVA, TARGET, ERASER,
+  EMPTY, WALL, FIRE, STEAM, SMOKE, WATER, OIL, ACID, LAVA, TARGET,
+  GAS, HONEY, ERASER,
   NAMES, COLORS,
 } from './elements.js';
 import { Sim } from './sim.js';
@@ -65,7 +66,8 @@ function render() {
       r = 236 * n; gg = 84 * n; b = 26;
     } else {
       const c = COLORS[e];
-      const dyn = (e === WATER || e === OIL || e === ACID || e === STEAM || e === SMOKE);
+      const dyn = (e === WATER || e === OIL || e === ACID || e === STEAM
+        || e === SMOKE || e === GAS || e === HONEY);
       const n = dyn ? shimmer[(i * 31 + f * 3) & 4095] : noise[i];
       r = c[0] * n; gg = c[1] * n; b = c[2] * n;
       if (e === TARGET) { // gentle pulse so goals read as special
